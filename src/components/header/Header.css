@@ -1,0 +1,16 @@
+
+.header {
+    margin-top: 20px;
+    display: flex;
+    align-items: baseline;
+    border-bottom: 2px solid black;
+}
+
+.header__logo {
+    color: inherit;
+    text-decoration: inherit;
+    font-size: 100px;
+    margin-right: 80px;
+}
+
+
