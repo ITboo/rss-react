@@ -1,0 +1,16 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding:10px;
+    width: 300px;
+}
+.card__title{
+    font-style: 12px;
+}
+
+.card__img{
+    align-self: center;
+    max-width: 200px;
+}

@@ -1,0 +1,17 @@
+.search__container{
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    margin: 20px;
+}
+.search__icon{
+    width: 20px;
+    margin-right: 10px;
+}
+.search__btn{
+    background-color: black;
+    color:white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-left: 5px;
+}

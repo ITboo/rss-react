@@ -1,5 +1,5 @@
 module.export = {
-    "parser": "@typescript-eslint/parser",
+    "parser": "@babel/eslint-parser",
     "extends": [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
@@ -40,7 +40,7 @@ module.export = {
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/no-var-reqiures": "off",
         "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
     },
     "settings": {
         "react": {
