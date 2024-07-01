@@ -1,10 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+import App from "./app/App.tsx";
+import { ErrorBoundary } from "./app/providers/ErrorBoundary/ErrorBoundary.tsx";
+import { ErrorPage } from "./pages/ErrorPage/ErrorPage.tsx";
+
+import "./app/styles/index.css";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <ErrorBoundary fallback={<ErrorPage />}>
+      <App />
+    </ErrorBoundary>
+  </StrictMode>,
+);

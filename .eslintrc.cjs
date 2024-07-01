@@ -27,7 +27,7 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: ["tsconfig.json", "tsconfig.node.json"],
+    project: ["tsconfig.app.json", "tsconfig.node.json"],
     tsConfigRootDir: __dirname,
   },
   plugins: ["@typescript-eslint", "react-refresh"],
