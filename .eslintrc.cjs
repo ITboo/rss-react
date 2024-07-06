@@ -34,6 +34,9 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     curly: ["error", "all"],
     "perfectionist/sort-imports": [
       "error",

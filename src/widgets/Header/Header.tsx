@@ -1,6 +1,7 @@
 import { Component } from "react";
 import type { ReactNode } from "react";
 
+import ErrorButton from "../../shared/ui/ErrorButton/ErrorButton";
 import { Logo } from "../../shared/ui/Logo/Logo";
 
 import styles from "./Header.module.css";
@@ -16,6 +17,7 @@ export class Header extends Component<HeaderProps> {
         <Logo />
         <input id="search" name="search" placeholder="Search..." type="text" />
         <button type="submit">Search</button>
+        <ErrorButton />
       </header>
     );
   }

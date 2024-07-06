@@ -17,7 +17,7 @@ export class Layout extends Component<LayoutProps> {
       <div className={styles.app}>
         <Header>Header</Header>
         <main className="main">
-          <HomePage />
+          <HomePage characters />
         </main>
         <Footer>Footer</Footer>
       </div>
