@@ -6,12 +6,12 @@ type SearchFormProps = {
 };
 
 type State = {
-  inputValue: string;
+  inputValue: null | string;
 };
 
 export class SearchForm extends Component<SearchFormProps, State> {
   state = {
-    inputValue: "",
+    inputValue: localStorage.getItem("inputValue"),
   };
 
   private onInputChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -20,8 +20,17 @@ export class SearchForm extends Component<SearchFormProps, State> {
 
   private onSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    const inputValue = this.state.inputValue.trim();
-    this.props.onSubmit(inputValue);
+    const inputValue = this.state.inputValue?.trim();
+    this.props.onSubmit(inputValue ?? "");
+  }
+
+  componentDidMount(): void {
+    localStorage.getItem("inputValue");
+    console.log(localStorage);
+  }
+
+  componentDidUpdate(): void {
+    localStorage.setItem("inputValue", this.state.inputValue ?? "");
   }
 
   render(): ReactNode {
@@ -33,7 +42,7 @@ export class SearchForm extends Component<SearchFormProps, State> {
           placeholder="Search..."
           spellCheck={false}
           type="search"
-          value={this.state.inputValue}
+          value={this.state.inputValue ?? []}
         />
         <button type="submit">Search</button>
       </form>
