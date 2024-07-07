@@ -18,3 +18,13 @@ export type CharacterType = {
   type: string;
   url: string;
 };
+
+export type ResponseType = {
+  info: {
+    count: number;
+    next: string;
+    pages: number;
+    prev: string;
+  };
+  results: CharacterType[];
+};

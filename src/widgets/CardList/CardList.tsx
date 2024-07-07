@@ -12,9 +12,13 @@ type CardListProps = {
 
 export class CardList extends Component<CardListProps> {
   render(): ReactNode {
-    const characters = this.props.data.map((character) => (
+    const characters = this.props.data?.map((character) => (
       <Card character={character} key={character.id} />
     ));
-    return <section className={styles.cards}>{characters}</section>;
+    return this.props.data.length > 0 ? (
+      <section className={styles.cards}>{characters}</section>
+    ) : (
+      <h2>Nothing is found</h2>
+    );
   }
 }
