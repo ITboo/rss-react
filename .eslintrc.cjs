@@ -30,7 +30,7 @@ module.exports = {
     project: ["tsconfig.app.json", "tsconfig.node.json"],
     tsConfigRootDir: __dirname,
   },
-  plugins: ["@typescript-eslint", "react-refresh"],
+  plugins: ["@typescript-eslint", "react-refresh", "react-compiler"],
   root: true,
   rules: {
     "@typescript-eslint/no-explicit-any": "error",
@@ -67,6 +67,7 @@ module.exports = {
         type: "natural",
       },
     ],
+    "react-compiler/react-compiler": "error",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
