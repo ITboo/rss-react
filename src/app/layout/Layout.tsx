@@ -1,20 +1,40 @@
-import { Component } from "react";
-import type { ReactNode } from "react";
-
-import { BASE_URL } from "../../shared/constants/constants";
 import { ResponseType } from "../../shared/types/types";
 import { CardList } from "../../widgets/CardList/CardList";
 import { Footer } from "../../widgets/Footer/Footer";
 import { Header } from "../../widgets/Header/Header";
 
-import styles from "./Layout.module.css";
+import styles from "../styles/Layout.module.css";
 
 type State = {
   data: ResponseType | null;
   isLoading: boolean;
 };
 
-export class Layout extends Component {
+export const Layout = (props: State) => {
+  const handleSearch = () => {
+    console.log("handleSearch");
+  };
+  return (
+    <div className={styles.app}>
+      <Header handleSearch={handleSearch} />
+      <CardList data={props.data?.results ?? []} />
+      <Footer />
+    </div>
+  );
+};
+
+/*
+import { BASE_URL } from "../../shared/constants/constants";
+import { ResponseType } from "../../shared/types/types";
+
+{isLoading ? (
+          <>loading...</>
+        ) : (
+          <main className="main">
+            
+          </main>
+        )}
+  
   private handleSearch = (query: string): void => {
     this.setState({ isLoading: true }, () => void this.fetchData(query));
   };
@@ -53,22 +73,4 @@ export class Layout extends Component {
 
   componentDidMount() {
     this.fetchData();
-  }
-
-  render(): ReactNode {
-    return (
-      <div className={styles.app}>
-        <Header handleSearch={this.handleSearch} />
-        {this.state.isLoading ? (
-          <>loading...</>
-        ) : (
-          <main className="main">
-            <CardList data={this.state.data?.results ?? []} />
-          </main>
-        )}
-
-        <Footer />
-      </div>
-    );
-  }
-}
+  }*/

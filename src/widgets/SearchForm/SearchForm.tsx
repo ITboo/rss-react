@@ -1,16 +1,35 @@
-import { Component } from "react";
-import type { ChangeEvent, FormEvent, ReactNode } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 type SearchFormProps = {
+  inputValue: null | string;
   onSubmit: (value: string) => void;
 };
 
-type State = {
-  inputValue: null | string;
-};
+function onSubmit(e: FormEvent<HTMLFormElement>): void {
+  console.log("onSubmit", e);
+}
+function onInputChange(e: ChangeEvent<HTMLInputElement>) {
+  console.log("onInputChange", e);
+}
 
-export class SearchForm extends Component<SearchFormProps, State> {
-  state = {
+export const SearchForm = (props: SearchFormProps) => {
+  return (
+    <form onSubmit={(e) => onSubmit(e)}>
+      <input
+        name="search"
+        onChange={(e) => onInputChange(e)}
+        placeholder="Search..."
+        spellCheck={false}
+        type="search"
+        value={props.inputValue ?? []}
+      />
+      <button type="submit">Search</button>
+    </form>
+  );
+};
+/*
+
+state = {
     inputValue: localStorage.getItem("inputValue"),
   };
 
@@ -31,21 +50,4 @@ export class SearchForm extends Component<SearchFormProps, State> {
 
   componentDidUpdate(): void {
     localStorage.setItem("inputValue", this.state.inputValue ?? "");
-  }
-
-  render(): ReactNode {
-    return (
-      <form onSubmit={(e) => this.onSubmit(e)}>
-        <input
-          name="search"
-          onChange={(e) => this.onInputChange(e)}
-          placeholder="Search..."
-          spellCheck={false}
-          type="search"
-          value={this.state.inputValue ?? []}
-        />
-        <button type="submit">Search</button>
-      </form>
-    );
-  }
-}
+  }*/

@@ -1,6 +1,6 @@
 import { Component, ReactNode } from "react";
 
-import styles from "./ErrorButton.module.css";
+import styles from "../../../app/styles/ErrorButton.module.css";
 
 const errorMessage = "Oh no... You have a problem!";
 class ErrorButton extends Component {
