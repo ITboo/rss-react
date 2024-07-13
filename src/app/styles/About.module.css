@@ -1,0 +1,17 @@
+.about {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.header {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 32px;
+  text-transform: uppercase;
+}

@@ -1,12 +1,12 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import "./Button.css";
 
 interface ButtonProps {
-  children: string;
+  children?: ReactNode;
   className?: string;
   onClick?: () => void;
-  type: "button" | "reset" | "submit" | undefined;
+  type?: "button" | "reset" | "submit" | undefined;
 }
 const Button: FC<ButtonProps> = (props) => {
   const { children, className, onClick, type } = props;

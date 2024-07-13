@@ -25,7 +25,7 @@ class ErrorButton extends Component {
     return (
       <>
         {!this.state.hasError && (
-          <Button className="errorButton" onClick={this.resetError}>
+          <Button className="error-button" onClick={this.resetError}>
             BOOM!
           </Button>
         )}
