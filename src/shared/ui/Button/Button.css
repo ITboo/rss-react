@@ -27,11 +27,9 @@
 }
 
 .search-button {
-  background-color: blue;
-}
-
-.details-button {
-  background-color: green;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 .navigation-button {

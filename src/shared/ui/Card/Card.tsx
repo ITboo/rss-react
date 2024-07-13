@@ -1,38 +1,28 @@
-import { Link } from "react-router-dom";
-
 import { CharacterType } from "../../../shared/types/types";
-import Button from "../Button/Button";
 
 import styles from "../../../app/styles/Card.module.css";
 
 type CardProps = {
   character: CharacterType;
+  openModal: (id: number) => void;
 };
 
 export const Card = (props: CardProps) => {
-  const { character } = props;
+  const { character, openModal } = props;
 
   return (
-    <Link className={styles.card} to="/about">
+    <article className={styles.card} onClick={() => openModal(character.id)}>
       <img
         alt={character.name}
-        height="300"
+        className={styles.image}
+        height="200"
         src={character.image}
-        width="300"
+        width="200"
       />
-      <h2 className={styles.cardHeading}>{character.name}</h2>
-      <div className={styles.cardInfo}>
-        <p>
-          <span>Status:</span> {character.status}
-        </p>
-        <p>
-          <span>Species:</span> {character.species}
-        </p>
-        <p>
-          <span>Gender:</span> {character.gender}
-        </p>
-        <Button className="detailsButton">SHOW ME MOAR</Button>
+      <h2 className={styles.card_heading}>{character.name}</h2>
+      <div className={styles.card_info}>
+        <p>{character.gender}</p>
       </div>
-    </Link>
+    </article>
   );
 };

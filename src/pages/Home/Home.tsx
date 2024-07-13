@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 
 import { BASE_URL } from "../../shared/constants/constants";
 import { ResponseType } from "../../shared/types/types";
+import { CardDetails } from "../../widgets/CardDetails/CardDetails";
 import { CardList } from "../../widgets/CardList/CardList";
 import { SearchForm } from "../../widgets/SearchForm/SearchForm";
+
+import styles from "../../app/styles/Home.module.css";
 
 export interface Character {
   created: string;
@@ -41,6 +44,8 @@ export const Home = () => {
   const [search, setSearch] = useState(
     localStorage.getItem("searchValue") ?? "",
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalCardID, setModalCardID] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -55,10 +60,26 @@ export const Home = () => {
     })();
   }, [search]);
 
+  const openModal = (id: number) => {
+    setIsModalOpen(true);
+    setModalCardID(id);
+  };
+
+  const setModal = () => setIsModalOpen(false);
+
   return (
     <main>
       <SearchForm setSearch={setSearch} />
-      {isLoading ? <h3>loading...</h3> : <CardList data={data} />}
+      <div className={styles.main__wrapper}>
+        {isLoading ? (
+          <h3>loading...</h3>
+        ) : (
+          <CardList data={data} openModal={openModal} />
+        )}
+        {isModalOpen && (
+          <CardDetails cardId={modalCardID} setModal={setModal} />
+        )}
+      </div>
     </main>
   );
 };

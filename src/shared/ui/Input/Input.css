@@ -1,3 +1,15 @@
 input {
-  color: black;
+  margin-right: 10px;
+  padding: 10px;
+
+  color: var(--text-light);
+
+  background-color: transparent;
+  border: 1px solid var(--blue);
+  border-radius: 40px;
+}
+
+input:focus {
+  border: 1px solid var(--text-accent);
+  outline: none;
 }
