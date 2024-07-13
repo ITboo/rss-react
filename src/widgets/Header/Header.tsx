@@ -1,18 +1,17 @@
+import { Link } from "react-router-dom";
+
 import ErrorButton from "../../shared/ui/ErrorButton/ErrorButton";
 import { Logo } from "../../shared/ui/Logo/Logo";
-import { SearchForm } from "../SearchForm/SearchForm";
 
 import styles from "../../app/styles/Header.module.css";
 
-type HeaderProps = {
-  handleSearch: (query: string) => void;
-};
-
-export const Header = (handleSearch: HeaderProps) => {
+export const Header = () => {
   return (
     <header className={styles.header}>
-      <Logo />
-      <SearchForm onSubmit={handleSearch} />
+      <Link to="/">
+        <Logo />
+      </Link>
+      <Link to="/about">About</Link>
       <ErrorButton />
     </header>
   );

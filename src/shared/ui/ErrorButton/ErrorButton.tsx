@@ -1,6 +1,6 @@
 import { Component, ReactNode } from "react";
 
-import styles from "../../../app/styles/ErrorButton.module.css";
+import Button from "../Button/Button";
 
 const errorMessage = "Oh no... You have a problem!";
 class ErrorButton extends Component {
@@ -25,9 +25,9 @@ class ErrorButton extends Component {
     return (
       <>
         {!this.state.hasError && (
-          <button className={styles.errorButton} onClick={this.resetError}>
-            I DARE YOU TO PUSH IT
-          </button>
+          <Button className="errorButton" onClick={this.resetError}>
+            BOOM!
+          </Button>
         )}
       </>
     );

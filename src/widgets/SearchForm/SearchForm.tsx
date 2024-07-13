@@ -1,53 +1,49 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+
+import Button from "../../shared/ui/Button/Button";
+import { Input } from "../../shared/ui/Input/Input";
 
 type SearchFormProps = {
-  inputValue: null | string;
-  onSubmit: (value: string) => void;
+  setSearch: (value: string) => void;
 };
 
-function onSubmit(e: FormEvent<HTMLFormElement>): void {
-  console.log("onSubmit", e);
-}
-function onInputChange(e: ChangeEvent<HTMLInputElement>) {
-  console.log("onInputChange", e);
-}
+export const SearchForm = ({ setSearch }: SearchFormProps) => {
+  const [inputValue, setInputValue] = useState(
+    localStorage.getItem("searchValue") ?? "",
+  );
+  const inputRef = useRef(inputValue);
 
-export const SearchForm = (props: SearchFormProps) => {
+  useEffect(() => {
+    inputRef.current = inputValue;
+  }, [inputValue]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem("searchValue", inputRef.current);
+    };
+  }, []);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    localStorage.setItem("searchValue", inputValue ?? "");
+    setSearch(inputValue);
+  };
+
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
-      <input
+    <form onSubmit={handleSubmit}>
+      <Input
         name="search"
-        onChange={(e) => onInputChange(e)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setInputValue(e.target.value)
+        }
         placeholder="Search..."
         spellCheck={false}
         type="search"
-        value={props.inputValue ?? []}
+        value={inputValue}
       />
-      <button type="submit">Search</button>
+      <Button className="searchButton" type="submit">
+        Search
+      </Button>
     </form>
   );
 };
-/*
-
-state = {
-    inputValue: localStorage.getItem("inputValue"),
-  };
-
-  private onInputChange(event: ChangeEvent<HTMLInputElement>): void {
-    this.setState({ inputValue: event.target.value });
-  }
-
-  private onSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
-    const inputValue = this.state.inputValue?.trim();
-    this.props.onSubmit(inputValue ?? "");
-  }
-
-  componentDidMount(): void {
-    localStorage.getItem("inputValue");
-    console.log(localStorage);
-  }
-
-  componentDidUpdate(): void {
-    localStorage.setItem("inputValue", this.state.inputValue ?? "");
-  }*/

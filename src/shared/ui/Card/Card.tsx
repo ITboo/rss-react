@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 import { CharacterType } from "../../../shared/types/types";
+import Button from "../Button/Button";
 
 import styles from "../../../app/styles/Card.module.css";
 
@@ -10,7 +13,7 @@ export const Card = (props: CardProps) => {
   const { character } = props;
 
   return (
-    <article className={styles.card}>
+    <Link className={styles.card} to="/about">
       <img
         alt={character.name}
         height="300"
@@ -20,9 +23,6 @@ export const Card = (props: CardProps) => {
       <h2 className={styles.cardHeading}>{character.name}</h2>
       <div className={styles.cardInfo}>
         <p>
-          <span>Episode appearances:</span> {character.episode.length}
-        </p>
-        <p>
           <span>Status:</span> {character.status}
         </p>
         <p>
@@ -31,13 +31,8 @@ export const Card = (props: CardProps) => {
         <p>
           <span>Gender:</span> {character.gender}
         </p>
-        <p>
-          <span>Origin:</span> {character.origin.name}
-        </p>
-        <p>
-          <span>Location:</span> {character.location.name}
-        </p>
+        <Button className="detailsButton">SHOW ME MOAR</Button>
       </div>
-    </article>
+    </Link>
   );
 };
