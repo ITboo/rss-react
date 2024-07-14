@@ -44,8 +44,4 @@ html {
   color: var(--text-main);
 
   background-color: var(--background-color);
-  background-image: radial-gradient(
-    rgb(217 217 217 / 20%),
-    var(--background-color)
-  );
 }

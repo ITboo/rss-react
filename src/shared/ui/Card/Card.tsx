@@ -20,7 +20,7 @@ export const Card = (props: CardProps) => {
         width="200"
       />
       <h2 className={styles.card_heading}>{character.name}</h2>
-      <div className={styles.card_info}>
+      <div className={styles.cardInfo}>
         <p>{character.gender}</p>
       </div>
     </article>

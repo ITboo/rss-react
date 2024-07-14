@@ -50,13 +50,13 @@ export function CardDetails({ cardId, setModal }: CardDetailsProps) {
     <h2>Loading</h2>
   ) : data ? (
     <>
-      <article className={styles.details_card}>
+      <article className={styles.detailsCard}>
         <div className={styles.close} onClick={setModal}>
           ✖
         </div>
-        <div className={styles.details_title}>{data.name}</div>
+        <div className={styles.detailsTitle}>{data.name}</div>
         <div>{data.species}</div>
-        <img alt={data.name} className={styles.details_img} src={data.image} />
+        <img alt={data.name} className={styles.detailsImg} src={data.image} />
 
         <div>
           <div>

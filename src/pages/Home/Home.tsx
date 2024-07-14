@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { useLocalStorage } from "../../app/hooks/useLocalStorage";
 import { BASE_URL } from "../../shared/constants/constants";
 import { ResponseType } from "../../shared/types/types";
 import { CardDetails } from "../../widgets/CardDetails/CardDetails";
@@ -41,9 +42,8 @@ export interface ResponseDataType {
 export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<ResponseType | null>(null);
-  const [search, setSearch] = useState(
-    localStorage.getItem("searchValue") ?? "",
-  );
+  const [search, setSearch] = useLocalStorage("searchValue", "");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalCardID, setModalCardID] = useState(0);
 
@@ -70,7 +70,7 @@ export const Home = () => {
   return (
     <main>
       <SearchForm setSearch={setSearch} />
-      <div className={styles.main__wrapper}>
+      <div className={styles.mainWrapper}>
         {isLoading ? (
           <h3>loading...</h3>
         ) : (

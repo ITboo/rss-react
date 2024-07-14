@@ -1,5 +1,6 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef } from "react";
 
+import { useLocalStorage } from "../../app/hooks/useLocalStorage";
 import Button from "../../shared/ui/Button/Button";
 import { Input } from "../../shared/ui/Input/Input";
 
@@ -10,9 +11,11 @@ type SearchFormProps = {
 };
 
 export const SearchForm = ({ setSearch }: SearchFormProps) => {
-  const [inputValue, setInputValue] = useState(
+  /*const [inputValue, setInputValue] = useState(
     localStorage.getItem("searchValue") ?? "",
-  );
+  );*/
+  const [inputValue, setInputValue] = useLocalStorage("searchValue", "");
+
   const inputRef = useRef(inputValue);
 
   useEffect(() => {
@@ -21,18 +24,19 @@ export const SearchForm = ({ setSearch }: SearchFormProps) => {
 
   useEffect(() => {
     return () => {
-      localStorage.setItem("searchValue", inputRef.current);
+      setInputValue(inputRef.current);
     };
   }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    localStorage.setItem("searchValue", inputValue ?? "");
+
+    setInputValue(inputValue ?? "");
     setSearch(inputValue);
   };
 
   return (
-    <form className={styles.search_form} onSubmit={handleSubmit}>
+    <form className={styles.searchForm} onSubmit={handleSubmit}>
       <Input
         name="search"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
