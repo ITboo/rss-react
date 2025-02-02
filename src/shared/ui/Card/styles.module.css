@@ -1,0 +1,13 @@
+.card {
+  border: 1px solid lightgray;
+  padding: 5px;
+  border-radius: 10px;
+  max-width: 315px;
+}
+.image {
+  border-radius: 7px;
+  max-width: 300px;
+}
+.param {
+  font-weight: bold;
+}

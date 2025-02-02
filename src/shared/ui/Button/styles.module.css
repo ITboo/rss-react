@@ -1,9 +1,16 @@
-.error_button {
-  background-color: red;
+.button {
   padding: 15px 20px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   color: white;
   font-weight: bold;
+}
+
+.error_button {
+  background-color: red;
+}
+
+.default_button {
+  background-color: green;
 }

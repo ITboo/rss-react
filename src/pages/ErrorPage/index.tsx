@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Component } from 'react';
 import styles from './styles.module.css';
+import { Button } from '../../shared/ui/Button';
 
 export class ErrorPage extends Component {
   private static handleRefresh = (): void => {
@@ -20,13 +21,11 @@ export class ErrorPage extends Component {
           <p className={styles.text}>
             You can refresh this page. Hope, it helps.
           </p>
-          <button
-            className={styles.refreshBtn}
-            type="button"
-            onClick={ErrorPage.handleRefresh}
-          >
-            Refresh the page
-          </button>
+          <div className={styles.btn_container}>
+            <Button type="button" onClick={ErrorPage.handleRefresh}>
+              Refresh the page
+            </Button>
+          </div>
         </div>
       </main>
     );

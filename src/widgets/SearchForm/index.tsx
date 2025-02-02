@@ -2,6 +2,7 @@ import type { FormEvent, ReactNode } from 'react';
 import { Component, createRef } from 'react';
 
 import styles from './styles.module.css';
+import { Button } from '../../shared/ui/Button';
 
 type SearchFormProps = {
   onSearch: (term: string) => void;
@@ -48,9 +49,9 @@ export class SearchForm extends Component<SearchFormProps> {
           disabled={isLoading}
           autoComplete="off"
         />
-        <button type="submit" disabled={isLoading}>
+        <Button type="submit" disabled={isLoading}>
           Search
-        </button>
+        </Button>
       </form>
     );
   }

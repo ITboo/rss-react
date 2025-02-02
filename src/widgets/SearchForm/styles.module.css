@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid gray;
+}
