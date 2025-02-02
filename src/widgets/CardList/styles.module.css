@@ -4,3 +4,6 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+.no_found {
+  text-align: center;
+}

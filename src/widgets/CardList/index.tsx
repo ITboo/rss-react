@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Component } from 'react';
 
 import { Card } from '../../shared/ui/Card';
+import { Loader } from '../../shared/ui/Loader';
 import { Character } from '../../shared/types/api';
 import { fetchCharacters } from '../../shared/lib/api';
 
@@ -65,11 +66,11 @@ export class CardList extends Component<CardListProps, CardListState> {
     const { isLoading } = this.props;
 
     if (isLoading) {
-      return <p>loading...</p>;
+      return <Loader />;
     }
 
     if (cards.length === 0) {
-      return <div className={styles.noResults}>No characters found</div>;
+      return <div className={styles.no_found}>No characters found</div>;
     }
 
     return (
