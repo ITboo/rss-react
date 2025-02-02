@@ -36,7 +36,7 @@ export class SearchForm extends Component<SearchFormProps> {
   };
 
   public render(): ReactNode {
-    const { isLoading, initialTerm } = this.props;
+    const { initialTerm } = this.props;
 
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
@@ -46,12 +46,9 @@ export class SearchForm extends Component<SearchFormProps> {
           type="search"
           placeholder="Search..."
           defaultValue={initialTerm}
-          disabled={isLoading}
           autoComplete="off"
         />
-        <Button type="submit" disabled={isLoading}>
-          Search
-        </Button>
+        <Button type="submit">Search</Button>
       </form>
     );
   }
