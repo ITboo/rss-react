@@ -1,55 +1,39 @@
-import type { FormEvent, ReactNode } from 'react';
-import { Component, createRef } from 'react';
-
-import styles from './styles.module.css';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { Button } from '../../shared/ui/Button';
+import styles from './styles.module.css';
 
-type SearchFormProps = {
+interface SearchProps {
   onSearch: (term: string) => void;
-  initialTerm: string;
-  isLoading: boolean;
-};
+  initialSearchTerm?: string;
+}
 
-export class SearchForm extends Component<SearchFormProps> {
-  private inputRef = createRef<HTMLInputElement>();
+const SearchForm = ({ onSearch }: SearchProps) => {
+  const [query, setQuery] = useState(localStorage.getItem('searchQuery') || '');
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  public componentDidMount(): void {
-    this.inputRef.current?.focus();
-  }
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
-  public componentDidUpdate(prevProps: SearchFormProps): void {
-    const { isLoading } = this.props;
-
-    if (prevProps.isLoading && !isLoading) {
-      this.inputRef.current?.focus();
-    }
-  }
-
-  private handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-
-    if (event.target instanceof HTMLFormElement) {
-      const { onSearch } = this.props;
-
-      onSearch(this.inputRef.current?.value.trim() ?? '');
-    }
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    localStorage.setItem('searchQuery', query);
+    onSearch(query);
   };
 
-  public render(): ReactNode {
-    const { initialTerm } = this.props;
+  return (
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <input
+        ref={inputRef}
+        className={styles.input}
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+      />
+      <Button type="submit">Search</Button>
+    </form>
+  );
+};
 
-    return (
-      <form className={styles.form} onSubmit={this.handleSubmit}>
-        <input
-          ref={this.inputRef}
-          className={styles.input}
-          type="search"
-          placeholder="Search..."
-          defaultValue={initialTerm}
-          autoComplete="off"
-        />
-        <Button type="submit">Search</Button>
-      </form>
-    );
-  }
-}
+export default SearchForm;

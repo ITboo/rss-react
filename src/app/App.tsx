@@ -1,10 +1,17 @@
-import { Component } from 'react';
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
+import Main from '../pages/MainPage';
+import Header from '../widgets/Header';
 
-import { MainPage } from '../pages/MainPage';
+import styles from './styles.module.css';
 
-export class App extends Component {
-  public render(): ReactNode {
-    return <MainPage />;
-  }
+export function App(): ReactNode {
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem('searchQuery') || ''
+  );
+  return (
+    <div className={styles.container}>
+      <Header onSearch={setSearchQuery} />
+      <Main searchQuery={searchQuery} />
+    </div>
+  );
 }

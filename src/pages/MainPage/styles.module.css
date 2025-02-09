@@ -1,14 +1,10 @@
-.container {
+.card_list {
+  justify-content: center;
   display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 20px;
-  width: 1400px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.no_found {
+  text-align: center;
 }

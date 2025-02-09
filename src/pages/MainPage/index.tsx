@@ -1,63 +1,55 @@
-import type { ReactNode } from 'react';
-import { Component } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
+import { Loader } from '../../shared/ui/Loader';
+import CharacterCard from '../../shared/ui/Card';
 
-import { CardList } from '../../widgets/CardList';
-import { SearchForm } from '../../widgets/SearchForm';
-import { ErrorButton } from '../../shared/ui/Button';
-import logo from '/logo.png';
 import styles from './styles.module.css';
+interface MainPageProps {
+  searchQuery: string;
+}
+const Main = ({ searchQuery }: MainPageProps): ReactNode => {
+  const [characters, setCharacters] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-type MainPageProps = Record<string, never>;
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `https://rickandmortyapi.com/api/character/?name=${searchQuery}`
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch characters');
+        }
+        const data = await response.json();
+        setCharacters(data.results);
+      } catch (error) {
+        console.error('Error fetching characters:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-type State = {
-  searchTerm: string;
-  isLoading: boolean;
-  lastSearchTime: Date | null;
+    fetchCharacters();
+  }, [searchQuery]);
+
+  return (
+    <main>
+      {characters.length === 0 && (
+        <div className={styles.no_found}>No characters found</div>
+      )}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={styles.card_list}>
+            {characters.map((character) => (
+              <CharacterCard key={character.id} character={character} />
+            ))}
+          </div>
+        </>
+      )}
+    </main>
+  );
 };
 
-const LOCAL_STORAGE_KEY = 'rss-app';
-
-export class MainPage extends Component<MainPageProps, State> {
-  constructor(props: MainPageProps) {
-    super(props);
-    this.state = {
-      searchTerm: localStorage.getItem(LOCAL_STORAGE_KEY) || '',
-      isLoading: false,
-      lastSearchTime: null,
-    };
-  }
-  private handleSearch = (term: string): void => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, term);
-    this.setState({ searchTerm: term, lastSearchTime: new Date() });
-  };
-
-  private handleLoadingState = (loading: boolean): void => {
-    this.setState({ isLoading: loading });
-  };
-
-  public render(): ReactNode {
-    const { searchTerm, isLoading, lastSearchTime } = this.state;
-
-    return (
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <img src={logo} alt="rick and morty logo" width={200} />
-          <SearchForm
-            onSearch={this.handleSearch}
-            initialTerm={searchTerm}
-            isLoading={isLoading}
-          />
-          <ErrorButton />
-        </header>
-        <main className={styles.main}>
-          <CardList
-            searchTerm={searchTerm}
-            onLoadingStateChange={this.handleLoadingState}
-            lastSearchTime={lastSearchTime}
-            isLoading={isLoading}
-          />
-        </main>
-      </div>
-    );
-  }
-}
+export default Main;
